@@ -5,11 +5,12 @@ import heapq
 
 
 class Graph():
-    def __init__(self):
+    def __init__(self, dir):
         self._n_nodes = None
         self._n_edges = None
         self._list = None
         self._distances = None
+        self._dir = dir
         
     def initialize_graph(self, n_nodes, n_edges):
         self._n_nodes = n_nodes
@@ -17,9 +18,9 @@ class Graph():
         print("Creating adjacence list")
         self._list = {node:[] for node in range(1, self._n_nodes+1)}
             
-    def add_edge(self, u, v, weight=1, dir=False):
+    def add_edge(self, u, v, weight=1):
         print("Adding edge...({},{})".format(u,v))
-        if dir:
+        if self._dir:
             self._list[u].append((v, weight))
         else:
             self._list[u].append((v, weight))
@@ -75,7 +76,7 @@ class Graph():
                     
 
 if __name__=="__main__":
-    grafo = Graph()
+    grafo = Graph(dir=False)
     
     #Exemplo toy1
     grafo.initialize_graph(10, 19)
