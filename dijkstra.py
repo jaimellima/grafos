@@ -3,32 +3,33 @@ import time
 
 
 class Graph():
-    def __init__(self):
+    def __init__(self, dir=False):
         self._n_nodes = None
         self._list = None
         self._distances = None
+        self._dir=dir
         
     def initialize_graph(self, n_nodes):
         self._n_nodes = n_nodes
         print("Creating adjacence list")
         self._list = {node:[] for node in range(1, self._n_nodes+1)}
             
-    def add_edge(self, u, v, weight=1, dir=False):
+    def add_edge(self, u, v, weight=1):
         print("Adding edge...({},{})".format(u,v))
-        if dir:
+        if self._dir:
             self._list[u].append((v, weight))
         else:
             self._list[u].append((v, weight))
             self._list[v].append((u, weight))
 
-    def graph_from_gr(self, file, dir=False):
+    def graph_from_gr(self, file):
         with open(file) as file:
             for linha in file:
                 values = linha.split(" ")
                 if values[0]=='p':
                     self.initialize_graph(n_nodes=int(values[2]))
                 elif values[0]=='a':
-                    self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]), dir=dir)
+                    self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]))
 
     def dijkstra(self, initial_node):
         start_time = time.time()
@@ -62,7 +63,7 @@ class Graph():
                     
 
 if __name__=="__main__":
-    grafo = Graph()
+    grafo = Graph(dir=True)
     
     #Exemplo toy1
     grafo.initialize_graph(10)
