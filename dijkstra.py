@@ -21,14 +21,14 @@ class Graph():
             self._list[u].append((v, weight))
             self._list[v].append((u, weight))
 
-    def graph_from_gr(self, file):
+    def graph_from_gr(self, file, dir=False):
         with open(file) as file:
             for linha in file:
                 values = linha.split(" ")
                 if values[0]=='p':
                     self.initialize_graph(n_nodes=int(values[2]))
                 elif values[0]=='a':
-                    self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]))
+                    self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]), dir=dir)
 
     def dijkstra(self, initial_node):
         start_time = time.time()

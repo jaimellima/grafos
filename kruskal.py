@@ -7,6 +7,7 @@ class Graph():
         self._n_nodes = None
         self._list = None
         self._distances = None
+        self._sets = None
         
     def initialize_graph(self, n_nodes):
         self._n_nodes = n_nodes
@@ -30,41 +31,39 @@ class Graph():
                 elif values[0]=='a':
                     self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]))
 
-    def prim(self):
-        tree = [] #árvores
-        weigths = []
-        not_visited = list(self._list.keys())
+    def find_set(self, v):
+        for s in self._sets:
+            if v in self._sets[s]:
+                return s
+               
+    def kruskal(self):
+        edges = []
+        for u in self._list:
+            for v, weight in self._list[u]:
+                edges.append((weight, u, v))
+        edges.sort()
+        print(edges)
         
-        edges = [] #lista de arestas candidatas
-        visited = []
+        num_vertices = len(list(self._list.keys()))
+        mst = []
+        self._sets = {v: {v} for v in self._list}
+        print(self._sets)
+
         
-        while len(not_visited)!=0:
-            u = not_visited.pop(0)
-            candidate_edge = sorted(self._list[u], key=lambda tupla: tupla[1])[0]
-            w = candidate_edge[0]
-            weigth = candidate_edge[1]
-            edge = (u, w)
-            tree.append(edge)
-            weigths.append(weigth)
-            visited.append(u)
-            for neighbor in self._list[u]:
-                if neighbor not in visited:
-                    visited.append(neighbor[0])
-                    try:
-                        not_visited.remove(neighbor[0])
-                    except:
-                        break
-                    candidate_edge = sorted(self._list[neighbor[0]], key=lambda tupla: tupla[1])[0]
-                    w = candidate_edge[0]
-                    weigth = candidate_edge[1]
-                    edge = (neighbor[0], w)
-                    print(neighbor[0])
-                    tree.append(edge)
-                    weigths.append(weigth)
-            #not_visited.remove(u)
-            #for v in not_visited:
-        print(tree)
-        print(weigths)
+        for weight, u, v in edges:
+            set_u = self.find_set(u)
+            set_v = self.find_set(v)
+
+            if set_u != set_v:
+                mst.append((u, v, weight))
+                self._sets[set_u].update(self._sets[set_v])
+
+                for vertex in self._sets[set_v]:
+                    self._sets[vertex] = self._sets[set_u]
+
+        return mst
+
+        
 
         
 
@@ -100,6 +99,7 @@ if __name__=="__main__":
     #grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
     #grafo.dijkstra(1)
     #grafo.show_distances()
-    grafo.prim()
+    mst = grafo.kruskal()
+    print(mst)
 
     
