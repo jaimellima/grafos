@@ -101,7 +101,7 @@ if __name__=="__main__":
     grafo.add_edge(u=7, v=10, weight=32)
     
     #EXEMPLO TOY2
-    '''
+    
     grafo.initialize_graph(6)
     grafo.add_edge(u=1, v=2, weight=1)
     grafo.add_edge(u=1, v=3, weight=3)
@@ -113,7 +113,7 @@ if __name__=="__main__":
     grafo.add_edge(u=4, v=5, weight=-1)
     grafo.add_edge(u=4, v=6, weight=2)
     grafo.add_edge(u=6, v=5, weight=3)
-    '''
+    
     grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
     mst = grafo.kruskal()
     total = 0
