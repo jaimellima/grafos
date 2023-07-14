@@ -78,6 +78,7 @@ class Graph():
         return 0
         
     def ford_fulkerson(self, source, sink):
+        start_time = time.time()
         max_flow = 0
         parent = {}
         flows = defaultdict(int)
@@ -110,6 +111,9 @@ class Graph():
                 v = u
 
             max_flow += path_flow
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Ford-Fulkerson time: {elapsed_time:.8f} seconds")
 
         return max_flow, flows
                     
@@ -122,4 +126,4 @@ if __name__=="__main__":
     max_flow, flows = grafo.ford_fulkerson(source=1, sink=6)
     print("Fluxo máximo:", max_flow)
     for (u, v), flow in flows.items():
-        print(f"Fluxo da aresta ({u}, {v}): {flow}")
+        print(f"Fluxo {u} -> {v}: {flow}")

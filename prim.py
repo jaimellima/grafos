@@ -36,6 +36,7 @@ class Graph():
                     self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]))
 
     def prim(self, root):
+        start_time = time.time()
         H = []
         for (v, c) in self._list[root]:
             heapq.heappush(H, (c, root, v))
@@ -63,13 +64,11 @@ class Graph():
             for (neib, c) in self._list[v]:
                 if neib not in closed_vert:
                     heapq.heappush(H, (c, v, neib))
-        print(mst)
-        print(total_coust)
-            
 
-        
-
-        
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Prim time: {elapsed_time:.8f} seconds")
+        return mst, total_coust
 
     def show_distances(self):
         print(self._distances)
@@ -103,6 +102,7 @@ if __name__=="__main__":
     #grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
     #grafo.dijkstra(1)
     #grafo.show_distances()
-    grafo.prim(1)
+    mst, total_coust = grafo.prim(1)
+    print("Custo total Prim: {}".format(total_coust))
 
     
