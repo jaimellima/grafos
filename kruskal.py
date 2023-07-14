@@ -10,9 +10,11 @@ class Graph():
         self._distances = None
         self._sets = None
         self._dir = dir
+        self._n_edges = None
         
-    def initialize_graph(self, n_nodes):
+    def initialize_graph(self, n_nodes, n_edges):
         self._n_nodes = n_nodes
+        self._n_edges = n_edges
         print("Creating adjacence list")
         self._list = {node:[] for node in range(1, self._n_nodes+1)}
             
@@ -29,7 +31,7 @@ class Graph():
             for linha in file:
                 values = linha.split(" ")
                 if values[0]=='p':
-                    self.initialize_graph(n_nodes=int(values[2]))
+                    self.initialize_graph(n_nodes=int(values[2]), n_edges=int(values[3]))
                 elif values[0]=='a':
                     self.add_edge(u=int(values[1]), v=int(values[2]), weight=int(values[3]))
 
@@ -52,7 +54,7 @@ class Graph():
         i = 0
         while edges:
             weight, u, v = heapq.heappop(edges)
-            print("Getting edge {} of {} edges".format(i, len(edges)))
+            print("Verifing edge {} in tree of {} edges".format(i, self._n_edges))
             i +=1
             set_u = self.find_set(u)
             set_v = self.find_set(v)
@@ -78,8 +80,8 @@ if __name__=="__main__":
     grafo = Graph(dir=True)
     
     #Exemplo toy1
-    
-    grafo.initialize_graph(10)
+    '''
+    grafo.initialize_graph(10, 19)
     grafo.add_edge(u=1, v=2, weight=60)
     grafo.add_edge(u=1, v=3, weight=54)
     grafo.add_edge(u=1, v=4, weight=42)
@@ -102,7 +104,7 @@ if __name__=="__main__":
     
     #EXEMPLO TOY2
     
-    grafo.initialize_graph(6)
+    grafo.initialize_graph(6, 10)
     grafo.add_edge(u=1, v=2, weight=1)
     grafo.add_edge(u=1, v=3, weight=3)
     grafo.add_edge(u=2, v=3, weight=1)
@@ -113,8 +115,8 @@ if __name__=="__main__":
     grafo.add_edge(u=4, v=5, weight=-1)
     grafo.add_edge(u=4, v=6, weight=2)
     grafo.add_edge(u=6, v=5, weight=3)
-    
-    grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
+    '''
+    grafo.graph_from_gr("USA-road-d.NY.gr")
     mst = grafo.kruskal()
     total = 0
     #print(mst)
