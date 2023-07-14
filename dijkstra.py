@@ -88,7 +88,7 @@ if __name__=="__main__":
     grafo.add_edge(u=9, v=10, weight=26)
     grafo.add_edge(u=7, v=10, weight=32)
     '''
-    grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
+    grafo.graph_from_gr("USA-road-d.NY.gr")
     grafo.dijkstra(1)
     #grafo.show_distances()
   
