@@ -66,6 +66,7 @@ if __name__=="__main__":
     grafo = Graph(dir=True)
     
     #Exemplo toy1
+    '''
     grafo.initialize_graph(10)
     grafo.add_edge(u=1, v=2, weight=60)
     grafo.add_edge(u=1, v=3, weight=54)
@@ -86,8 +87,8 @@ if __name__=="__main__":
     grafo.add_edge(u=8, v=10, weight=25)
     grafo.add_edge(u=9, v=10, weight=26)
     grafo.add_edge(u=7, v=10, weight=32)
-    
-    #grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
+    '''
+    grafo.graph_from_gr("/home/jaimel/Downloads/USA-road-d.NY.gr")
     grafo.dijkstra(1)
     #grafo.show_distances()
   
