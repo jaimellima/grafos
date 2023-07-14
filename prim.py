@@ -48,7 +48,7 @@ class Graph():
 
         #laço principal do algoritmo
         while n_tree_edges < self._n_nodes-1:
-
+            print("Adding {} edge in tree of {} total edges".format(n_tree_edges+1, self._n_nodes-1))
             #esse laço é porque as arestas que não serão utilizadas não estão sendo retiradas da heap, porque isso ficaria custoso. Mas como
             #os extremos das arestas já estão na árvore esse loop garante que os nós não sejam incluídos.
             while True:
@@ -75,7 +75,7 @@ class Graph():
                     
 
 if __name__=="__main__":
-    grafo = Graph(dir=False)
+    grafo = Graph(dir=True)
     
     #Exemplo toy1
     '''
